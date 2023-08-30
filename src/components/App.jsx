@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ContactForm from './ContactForm';
 import ContactList from './ContactList';
 import Filter from './Filter';
+import '../css/ContactForm.css';
 
 class App extends Component {
   state = {
@@ -51,7 +52,7 @@ class App extends Component {
     return (
       <div>
         <h1>Phonebook</h1>
-        <ContactForm onAddContact={this.addContact} contacts={this.state.contacts} />
+        <ContactForm onAddContact={this.addContact} />
         <h2>Contacts</h2>
         <Filter value={this.state.filter} onChangeFilter={this.handleFilterChange} />
         <ContactList
@@ -63,4 +64,5 @@ class App extends Component {
   }
 }
 
-export default App;
+export {App};
+
