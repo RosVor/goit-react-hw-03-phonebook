@@ -28,7 +28,6 @@ class ContactForm extends Component {
 
   render() {
     return (
-      
       <form onSubmit={this.handleSubmit} className="contact-form">
         <label>
           Name:
@@ -50,7 +49,9 @@ class ContactForm extends Component {
             className="contact-input"
           />
         </label>
-        <button className="button-submit" type="submit">Add Contact</button>
+        <button className="button-submit" type="submit">
+          Add Contact
+        </button>
       </form>
     );
   }

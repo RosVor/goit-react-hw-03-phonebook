@@ -23,16 +23,32 @@ class App extends Component {
     }
   }
 
+  isContactExist = (name) => {
+    return this.state.contacts.some((contact) => contact.name.toLowerCase() === name.toLowerCase());
+  }
+
   addContact = (contact) => {
+    const { name } = contact;
+    
+    if (this.isContactExist(name)) {
+      alert(`${name} is already in contacts.`);
+      return;
+    }
+
     this.setState((prevState) => ({
       contacts: [...prevState.contacts, contact],
     }));
   };
 
   deleteContact = (contactId) => {
-    this.setState((prevState) => ({
-      contacts: prevState.contacts.filter((contact) => contact.id !== contactId),
-    }));
+    const { contacts } = this.state;
+    for (let i = 0; i < contacts.length; i++) {
+      if (contacts[i].id === contactId) {
+        contacts.splice(i, 1);
+        this.setState({ contacts });
+        return;
+      }
+    }
   };
 
   handleFilterChange = (filter) => {
@@ -54,11 +70,8 @@ class App extends Component {
         <h1>Phonebook</h1>
         <ContactForm onAddContact={this.addContact} />
         <h2>Contacts</h2>
-        <Filter value={this.state.filter} onChangeFilter={this.handleFilterChange} />
-        <ContactList
-          contacts={visibleContacts}
-          onDeleteContact={this.deleteContact}
-        />
+        <Filter value={this.state.filter} onFilterChange={this.handleFilterChange} />
+        <ContactList contacts={visibleContacts} onDeleteContact={this.deleteContact} />
       </div>
     );
   }
