@@ -7,7 +7,7 @@ import '../css/ContactForm.css';
 class App extends Component {
   state = {
     contacts: [],
-    filter: '',
+    filter: '', 
   };
 
   componentDidMount() {
@@ -38,8 +38,10 @@ class App extends Component {
     this.setState((prevState) => ({
       contacts: [...prevState.contacts, contact],
     }));
+    
   };
 
+  
   deleteContact = (contactId) => {
     const { contacts } = this.state;
     for (let i = 0; i < contacts.length; i++) {
@@ -57,6 +59,11 @@ class App extends Component {
 
   getVisibleContacts = () => {
     const { contacts, filter } = this.state;
+    
+    if (typeof filter !== 'string') {
+      return contacts;
+    }
+    
     return contacts.filter((contact) =>
       contact.name.toLowerCase().includes(filter.toLowerCase())
     );

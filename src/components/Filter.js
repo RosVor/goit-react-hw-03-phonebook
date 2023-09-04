@@ -1,19 +1,23 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 
-class Filter extends Component {
-  render() {
-    const { filter, onFilterChange } = this.props;
+function Filter({ onFilterChange }) {
+  const [filter, setFilter] = useState('');
 
-    return (
-      <input
-        type="text"
-        name="filter"
-        placeholder="Search contacts..."
-        value={filter}
-        onChange={onFilterChange}
-      />
-    );
-  }
+  const handleFilterChange = (e) => {
+    const value = e.target.value;
+    setFilter(value);
+    onFilterChange(value);
+  };
+
+  return (
+    <input
+      type="text"
+      name="filter"
+      placeholder="Search contacts..."
+      value={filter}
+      onChange={handleFilterChange}
+    />
+  );
 }
 
 export default Filter;
